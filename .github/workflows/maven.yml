@@ -43,9 +43,20 @@ jobs:
       run: |
         mkdir -p springboot-docker/target
         mv artifact/SpringBootDocker-0.0.1-SNAPSHOT.jar springboot-docker/target
-        docker build -t springboot-docker .
+        docker build -t registry.digitalocean.com/kube-cont-reg/springboot-docker:latest .
 
     - name: Push Docker images
       run: echo "Pushing Docker image to Container Registry (e.g. ECR)"
     - name: Deploy application
       run: echo "Deploying application (e.g. Kubernetes)"
+      
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with: 
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        
+    - name: Log in to DigitalOcean Container Registry with short-lived credentials
+      run: doctl registry login --expiry-seconds 600
+
+    - name: Push image to DigitalOcean Container Registry
+      run: docker push registry.digitalocean.com/kube-cont-reg/springboot-docker:latest
