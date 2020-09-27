@@ -42,7 +42,7 @@ jobs:
     - name: Build Docker container
       run: |
         mkdir -p SpringBootDocker-0.0.1-SNAPSHOT/target
-        mv artifact/SpringBootDocker-0.0.1-SNAPSHOT.jar SpringBootDocker-0.0.1-SNAPSHOT/target
+        mv artifact/SpringBootDocker-0.0.1-SNAPSHOT.jar /target
         docker build -t springboot-docker .
 
     - name: Push Docker images
