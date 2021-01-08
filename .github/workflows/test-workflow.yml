@@ -32,7 +32,6 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }} 
         script: |
-          cd /var/sentora/hostdata/imgglobal/public_html/Olympiad/test
-          scp -P${{ secrets.PORT }} /springboot-docker/target/SpringBootDocker-0.0.1-SNAPSHOT.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:.
+          cd /var/sentora/hostdata/imgglobal/public_html/Olympiad/
           ls -la
           echo $(ps -ef | grep 'SpringBootDocker-0.0.1-SNAPSHOT.jar' | grep -v 'grep' | awk '{ printf $2 }')          
