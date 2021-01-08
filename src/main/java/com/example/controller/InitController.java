@@ -12,5 +12,11 @@ public class InitController {
 		
 		return "Welcome to Spring Boot";
 	}
+	
+	@GetMapping(path = "/test")
+	public String initMethod2() {
+		
+		return "Welcome to Spring Boot Test";
+	}	
 
 }
