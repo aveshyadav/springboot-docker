@@ -46,6 +46,6 @@ jobs:
           kill $(ps -ef | grep 'SpringBootDocker-0.0.1-SNAPSHOT.jar' | grep -v 'grep' | awk '{ printf $2 }') 
           mv github/workspace/target/SpringBootDocker-0.0.1-SNAPSHOT.jar SpringBootDocker-0.0.1-SNAPSHOT.jar 
           rm -rf github
-          nohup java -jar /SpringBootDocker-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
+          nohup java -jar SpringBootDocker-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
           ls
           echo $(ps -ef | grep 'SpringBootDocker-0.0.1-SNAPSHOT.jar' | grep -v 'grep' | awk '{ printf $2 }')          
