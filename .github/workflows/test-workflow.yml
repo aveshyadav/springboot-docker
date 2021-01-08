@@ -31,7 +31,9 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }} 
+        source: "/target/SpringBootDocker-0.0.1-SNAPSHOT.jar"
+        target: "/var/sentora/hostdata/imgglobal/public_html/Olympiad/test/"
         script: |
-          cd /var/sentora/hostdata/imgglobal/public_html/Olympiad/
+          cd /var/sentora/hostdata/imgglobal/public_html/Olympiad/test
           ls -la
           echo $(ps -ef | grep 'SpringBootDocker-0.0.1-SNAPSHOT.jar' | grep -v 'grep' | awk '{ printf $2 }')          
