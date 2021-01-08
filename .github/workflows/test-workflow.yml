@@ -19,10 +19,7 @@ jobs:
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
-      
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml        
+        java-version: 1.8        
 
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
@@ -31,7 +28,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }} 
-        source: "src"
+        source: "/"
         target: "/var/sentora/hostdata/imgglobal/public_html/Olympiad/test"
         
     - name: executing remote ssh commands using password
@@ -43,5 +40,9 @@ jobs:
         port: ${{ secrets.PORT }} 
         script: |
           cd /var/sentora/hostdata/imgglobal/public_html/Olympiad/test
+          sh /springboot-docker/mvnw clean compile install
+          mv /target/SpringBootDocker-0.0.1-SNAPSHOT.jar /var/sentora/hostdata/imgglobal/public_html/Olympiad/test/
+          nohup java -jar /target/SpringBootDocker-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
+          rm -rf springboot-docker
           ls -la
           echo $(ps -ef | grep 'SpringBootDocker-0.0.1-SNAPSHOT.jar' | grep -v 'grep' | awk '{ printf $2 }')          
