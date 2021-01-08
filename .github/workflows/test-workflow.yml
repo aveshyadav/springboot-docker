@@ -28,7 +28,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }} 
-        source: "/"
+        source: ""
         target: "/var/sentora/hostdata/imgglobal/public_html/Olympiad/test"
         
     - name: executing remote ssh commands using password
