@@ -43,10 +43,13 @@ jobs:
         port: ${{ secrets.PORT }} 
         script: |
           cd /var/sentora/hostdata/imgglobal/public_html/Olympiad/test
+          echo "Current Directory"
+          pwd
           echo "Current pid :" $(ps -ef | grep 'SpringBootDocker-0.0.1-SNAPSHOT.jar' | grep -v 'grep' | awk '{ printf $2 }')
           kill $(ps -ef | grep 'SpringBootDocker-0.0.1-SNAPSHOT.jar' | grep -v 'grep' | awk '{ printf $2 }')
           rm -rf app.log
           rm -rf SpringBootDocker-0.0.1-SNAPSHOT.jar
+          echo "Old jar, log file and process Clean up"
           mv github/workspace/target/SpringBootDocker-0.0.1-SNAPSHOT.jar SpringBootDocker-0.0.1-SNAPSHOT.jar 
           rm -rf github
           sleep 5
